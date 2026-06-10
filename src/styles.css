@@ -151,6 +151,54 @@ button:disabled {
   margin: 0;
 }
 
+.result-content {
+  overflow: auto;
+  padding: 18px;
+  color: #3f4b47;
+  line-height: 1.55;
+}
+
+.sample-notice {
+  margin: 0 0 18px;
+  border: 1px solid #d9c56c;
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: #5a4a00;
+  background: #fff8d8;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.result-content section {
+  margin: 0 0 18px;
+}
+
+.result-content h3 {
+  margin: 0 0 8px;
+  color: #182521;
+  font-size: 0.88rem;
+}
+
+.result-content p,
+.result-content ul,
+.result-content ol {
+  margin: 0;
+}
+
+.result-content ul,
+.result-content ol {
+  padding-left: 20px;
+}
+
+.result-content li {
+  margin-bottom: 8px;
+}
+
+.result-content li span {
+  display: block;
+  margin-top: 2px;
+}
+
 @media (max-width: 760px) {
   .app-shell {
     padding: 28px 16px;

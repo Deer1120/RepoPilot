@@ -1,13 +1,47 @@
 import { useState } from 'react';
-import type { CodeInput } from './types/codeExplanation';
+import type {
+  CodeExplanationResult,
+  CodeInput,
+} from './types/codeExplanation';
+
+const sampleExplanationResult: CodeExplanationResult = {
+  summary:
+    'This snippet appears to define a small unit of application logic. The explanation below shows how RepoPilot will eventually structure code understanding results.',
+  keyConcepts: ['Function responsibility', 'Input handling', 'Return value'],
+  walkthrough: [
+    {
+      title: 'Identify the entry point',
+      explanation:
+        'Start by locating the main function, component, or exported block that other code is expected to call.',
+    },
+    {
+      title: 'Trace the data flow',
+      explanation:
+        'Follow how input values are read, transformed, and returned to understand the behavior of the snippet.',
+    },
+    {
+      title: 'Check assumptions',
+      explanation:
+        'Look for implicit assumptions such as required input shape, nullable values, or missing error handling.',
+    },
+  ],
+  risks: [
+    'The code may rely on input assumptions that are not visible in the snippet.',
+    'Edge cases are hard to assess without surrounding tests or call sites.',
+  ],
+  suggestedNextSteps: [
+    'Add a real Code Explanation Skill in a later step.',
+    'Validate structured output before rendering future AI responses.',
+  ],
+};
 
 export default function App() {
   const [codeInput, setCodeInput] = useState<CodeInput>({ content: '' });
-  const [message, setMessage] = useState('');
+  const [hasAnalyzed, setHasAnalyzed] = useState(false);
   const hasCodeInput = codeInput.content.trim().length > 0;
 
   function handleAnalyze() {
-    setMessage('Input captured. AI analysis is not implemented yet.');
+    setHasAnalyzed(true);
   }
 
   return (
@@ -44,9 +78,61 @@ export default function App() {
             <div className="panel-heading">
               <h2 id="result-title">Result</h2>
             </div>
-            <div className="empty-result">
-              <p>{message || 'No analysis yet.'}</p>
-            </div>
+            {hasAnalyzed ? (
+              <div className="result-content">
+                <p className="sample-notice">
+                  This is a local sample result, not AI-generated.
+                </p>
+
+                <section>
+                  <h3>Summary</h3>
+                  <p>{sampleExplanationResult.summary}</p>
+                </section>
+
+                <section>
+                  <h3>Key Concepts</h3>
+                  <ul>
+                    {sampleExplanationResult.keyConcepts.map((concept) => (
+                      <li key={concept}>{concept}</li>
+                    ))}
+                  </ul>
+                </section>
+
+                <section>
+                  <h3>Walkthrough</h3>
+                  <ol>
+                    {sampleExplanationResult.walkthrough.map((step) => (
+                      <li key={step.title}>
+                        <strong>{step.title}</strong>
+                        <span>{step.explanation}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+
+                <section>
+                  <h3>Risks</h3>
+                  <ul>
+                    {sampleExplanationResult.risks.map((risk) => (
+                      <li key={risk}>{risk}</li>
+                    ))}
+                  </ul>
+                </section>
+
+                <section>
+                  <h3>Suggested Next Steps</h3>
+                  <ul>
+                    {sampleExplanationResult.suggestedNextSteps.map((step) => (
+                      <li key={step}>{step}</li>
+                    ))}
+                  </ul>
+                </section>
+              </div>
+            ) : (
+              <div className="empty-result">
+                <p>No analysis yet.</p>
+              </div>
+            )}
           </section>
         </div>
       </section>
