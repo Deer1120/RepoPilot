@@ -132,6 +132,11 @@ button:hover {
   background: #2f6f62;
 }
 
+button:disabled {
+  background: #9aa6a2;
+  cursor: not-allowed;
+}
+
 .empty-result {
   display: flex;
   flex: 1;
